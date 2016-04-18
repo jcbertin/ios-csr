@@ -229,7 +229,7 @@ bail:
         publicKeyBits = CFBridgingRelease(publicData);
     }
     
-	NSMutableData * certificationRequestInfo = [self buildCertificationRequestInfo:publicKeyBits];
+	NSData * certificationRequestInfo = [self buildCertificationRequestInfo:publicKeyBits];
 
 #if TARGET_OS_IPHONE
     // Build signature - step 1: SHA256 hash
@@ -326,7 +326,7 @@ bail:
 }
 
 
--(NSMutableData *)buildCertificationRequestInfo:(NSData *)publicKeyBits
+-(NSData *)buildCertificationRequestInfo:(NSData *)publicKeyBits
 {
 	NSMutableData * certificationRequestInfo = [[NSMutableData alloc] initWithCapacity:512];
 	
@@ -361,7 +361,7 @@ bail:
 	
 	[SCCSR enclose:certificationRequestInfo by:SEQUENCE_tag]; // Enclose into SEQUENCE
 	
-	return certificationRequestInfo;
+	return [NSData dataWithData:certificationRequestInfo];
 }
 
 /// Utility class methods ...
