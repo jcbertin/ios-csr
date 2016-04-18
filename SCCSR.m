@@ -100,6 +100,9 @@ static OSStatus ItemGetAttributeContent(CFStringRef itemClass, id item, const CF
 
 -(NSData *) buildWithCertificate:(SecCertificateRef)certificate error:(NSError* __autoreleasing*)error
 {
+    if (error != NULL)
+        *error = nil;
+    
     SecIdentityRef identity = NULL;
     NSData* signingRequest = nil;
     OSStatus status = SecIdentityCreateWithCertificate(NULL, certificate, &identity);
