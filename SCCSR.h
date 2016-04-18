@@ -27,6 +27,11 @@
 
 @property (nonatomic, strong) NSData* subjectDER;
 
--(NSData *) build:(NSData *)publicKeyBits privateKey:(SecKeyRef)privateKey;
+-(NSData *) buildWithCertificate:(SecCertificateRef)certificate error:(NSError* __autoreleasing*)error;
+-(NSData *) buildWithIdentity:(SecIdentityRef)identity error:(NSError* __autoreleasing*)error;
+-(NSData *) buildWithPrivateKey:(SecKeyRef)privateKey error:(NSError* __autoreleasing*)error;
+-(NSData *) build:(NSData *)publicKeyBits privateKey:(SecKeyRef)privateKey error:(NSError* __autoreleasing*)error;
+
++ (NSError*)errorWithSecurityStatus:(OSStatus)status;
 
 @end
